@@ -1,20 +1,16 @@
 {
   "name": "cake-react-cli",
-  "version": "0.2.0",
-  "description": "A simple CLI for creating your projects",
+  "version": "1.0.0",
+  "description": "a simple CLI for creating your react projects",
   "bin": {
     "cake-react-cli": "bin/index.js"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/jrainlau/scion.git"
-  },
-  "author": "Jrain Lau",
+  "author": "liyongping",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/jrainlau/scion/issues"
+    "url": "https://github.com/MemoryNoodles/cake-react-cli/issues"
   },
-  "homepage": "https://github.com/jrainlau/scion#readme",
+  "homepage": "https://github.com/MemoryNoodles/cake-react-cli",
   "dependencies": {
     "chalk": "^1.1.3",
     "cli-table": "^0.3.1",
