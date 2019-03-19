@@ -1,0 +1,32 @@
+{
+  "name": "cake-react-cli",
+  "version": "0.2.0",
+  "description": "A simple CLI for creating your projects",
+  "bin": {
+    "cake-react-cli": "bin/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jrainlau/scion.git"
+  },
+  "author": "Jrain Lau",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/jrainlau/scion/issues"
+  },
+  "homepage": "https://github.com/jrainlau/scion#readme",
+  "dependencies": {
+    "chalk": "^1.1.3",
+    "cli-table": "^0.3.1",
+    "commander": "^2.9.0",
+    "fs-extra": "^7.0.1",
+    "github-download-parts": "^2.1.0",
+    "handlebars": "^4.0.8",
+    "inquirer": "^3.0.6",
+    "metalsmith": "^2.3.0",
+    "ora": "^1.4.0"
+  },
+  "devDependencies": {
+    "cross-spawn": "^6.0.5"
+  }
+}
