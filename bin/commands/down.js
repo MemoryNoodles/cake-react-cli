@@ -25,6 +25,7 @@ const question = [
     {
         type: 'input',
         name: 'catalog',
+        default:"myApp",
         message: 'catalog name:',
         validate (val) {
             //存在这个文件则返回null, 不存在直接创建文件夹
