@@ -49,6 +49,7 @@ module.exports = prompt(question).then(({ name, catalog, filename }) => {
     const spinner = ora('Downloading template...');
     spinner.start()
     if (filename) {
+        console.log(filename, 111)
         repo(tplJson(name), catalog, filename)
         .then(() => {
             console.log(chalk.green('download success'));
@@ -62,6 +63,7 @@ module.exports = prompt(question).then(({ name, catalog, filename }) => {
         });
     }
     else {
+        console.log(filename, 22)
         repo(tplJson(name), catalog)
         .then(() => {
             console.log(chalk.green('download success'));
