@@ -1,5 +1,4 @@
 const { prompt } = require('inquirer')
-const { listTable } = require(`../utils`)
 const { ensureDirSync } = require('fs-extra')  
 const chalk = require('chalk')
 const repo = require('github-download-parts');
