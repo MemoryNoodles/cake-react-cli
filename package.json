@@ -1,6 +1,6 @@
 {
   "name": "cake-react-cli",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "a simple CLI for creating your react projects",
   "bin": {
     "cake-react-cli": "bin/index.js"
@@ -10,10 +10,9 @@
   "bugs": {
     "url": "https://github.com/MemoryNoodles/cake-react-cli/issues"
   },
-  "files":[
-      "bin",
-      "package.json"
-
+  "files": [
+    "bin",
+    "package.json"
   ],
   "homepage": "https://github.com/MemoryNoodles/cake-react-cli",
   "dependencies": {
