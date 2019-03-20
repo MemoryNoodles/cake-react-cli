@@ -50,7 +50,7 @@ module.exports = prompt(question).then(({ name, catalog, filename }) => {
     spinner.start()
     if (filename) {
         console.log(filename, 111)
-        repo(tplJson(name), catalog, filename)
+        repo(tplJson[name], catalog, filename)
         .then(() => {
             console.log(chalk.green('download success'));
             spinner.stop()
@@ -64,7 +64,7 @@ module.exports = prompt(question).then(({ name, catalog, filename }) => {
     }
     else {
         console.log(filename, 22)
-        repo(tplJson(name), catalog)
+        repo(tplJson[name], catalog)
         .then(() => {
             console.log(chalk.green('download success'));
             spinner.stop()
