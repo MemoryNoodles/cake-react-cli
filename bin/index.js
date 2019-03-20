@@ -1,13 +1,9 @@
 #!/usr/bin/env node
  //上面一句话不要随便修改 作用：帮助脚本找到node的脚本解释器，没他不行。
-//const fs = require('fs-extra');
-//const repo = require('github-download-parts');
-//const chalk = require('chalk');
-//const dfJson = require("./gitFileConfig.js");
 const program = require('commander');
 const { resolve } = require("path");
 //const ora = require('ora');
-const res = command => resolve(__dirname, './commands/', command)
+const res = command => resolve(__dirname, './commands/', command); 
 
 
 
