@@ -2,6 +2,7 @@
  //上面一句话不要随便修改 作用：帮助脚本找到node的脚本解释器，没他不行。
 const fs = require("fs-extra");
 const path = require("path");
+const chalk = require('chalk')
 
 //文件
 let importFile = fs.readFileSync(`${__dirname}/configFile/importFile.js`, 'utf8');
@@ -11,6 +12,7 @@ let levelsFileText = fs.readFileSync(`${__dirname}/configFile/level2.js`, 'utf8'
 
 //menu的文件夹数据格式不能变，参照menuTemplate
 const menu = JSON.parse(fs.readFileSync(`./config/menu.js`, 'utf8'));
+console.log(chalk.green('Pay attention to the location of the menu. If it is wrong, it is likely that the location of the menu is wrong.'));
 
 
 let rootCatalog = path.resolve();
