@@ -1,5 +1,4 @@
-
-module.exports  =  [
+ [
     {
         "Level1": "首页",
         "url": "/Dashboard/FirstMenus/index",

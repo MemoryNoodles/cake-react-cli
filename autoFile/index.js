@@ -1,13 +1,16 @@
-const menu = require("cake-menu");
+#!/usr/bin/env node
+ //上面一句话不要随便修改 作用：帮助脚本找到node的脚本解释器，没他不行。
 const fs = require("fs-extra");
 const path = require("path");
 
 //文件
-let importFile = fs.readFileSync("./autoFile/configFile/importFile.js", 'utf8');
-let routerConfig = fs.readFileSync("./autoFile/configFile/routerConfig.js", 'utf8');
-let classFunc = fs.readFileSync("./autoFile/configFile/classFunc.js", 'utf8');
-let levelsFileText = fs.readFileSync("./autoFile/configFile/level2.js", 'utf8');
+let importFile = fs.readFileSync(`${__dirname}/configFile/importFile.js`, 'utf8');
+let routerConfig = fs.readFileSync(`${__dirname}/configFile/routerConfig.js`, 'utf8');
+let classFunc = fs.readFileSync(`${__dirname}/configFile/classFunc.js`, 'utf8');
+let levelsFileText = fs.readFileSync(`${__dirname}/configFile/level2.js`, 'utf8');
 
+//menu的文件夹数据格式不能变，参照menuTemplate
+const menu = JSON.parse(fs.readFileSync(`./config/menu.js`, 'utf8'));
 
 
 let rootCatalog = path.resolve();
@@ -22,7 +25,7 @@ for (let i=0; i<menu.length; i++){
 
         menuRootArr = menu[i].url.split(reRoot);  
         //新建并判断   
-        if (fs.ensureDirSync(menuRootArr[2])) {
+        if (fs.ensureDirSync(firstUpperCase(menuRootArr[2]))) {
 
             //切换目录
             changeCatalog(menuRootArr[2])
@@ -46,7 +49,7 @@ for (let i=0; i<menu.length; i++){
             process.chdir(rootCatalog)
             menuRootArr = aMenu.url.split(reRoot); 
             //新建并判断   
-            if (fs.ensureDirSync(menuRootArr[2])) {    
+            if (fs.ensureDirSync(firstUpperCase(menuRootArr[2]))) {    
 
                 //切换目录
                 changeCatalog(menuRootArr[2])   
@@ -54,7 +57,7 @@ for (let i=0; i<menu.length; i++){
                 fileGenerate(menuRootArr[2], menuRootArr[3], menu[i].Level2)
 
                 //新建二级文件    
-                fs.ensureDirSync(menuRootArr[3])
+                fs.ensureDirSync(firstLowerCase(menuRootArr[3]))
                 //切换目录
                 changeCatalog(menuRootArr[3])
                 //二级目录下的jsx文件
@@ -64,7 +67,7 @@ for (let i=0; i<menu.length; i++){
                 //切换目录
                 changeCatalog(menuRootArr[2])
                 //新建二级文件            
-                fs.ensureDirSync(menuRootArr[3])
+                fs.ensureDirSync(firstLowerCase(menuRootArr[3]))
                 //切换目录
                 changeCatalog(menuRootArr[3])
                 //二级目录下的jsx文件
