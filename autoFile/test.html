@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+   <script>
+       var str = ` render(){
+                    return <div>盘点单管理</div>
+                }`;
+        var nameRe = /(?:<div>)(.+)(?:<\/div>)/g;
+       console.log(nameRe.exec(str))
+    </script> 
+</body>
+</html>

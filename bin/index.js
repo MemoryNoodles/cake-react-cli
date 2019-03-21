@@ -1,9 +1,11 @@
 #!/usr/bin/env node
  //上面一句话不要随便修改 作用：帮助脚本找到node的脚本解释器，没他不行。
 const program = require('commander');
-const { resolve } = require("path");
+const {
+    resolve
+} = require("path");
 //const ora = require('ora');
-const res = command => resolve(__dirname, './commands/', command); 
+const res = command => resolve(__dirname, './commands/', command);
 
 
 
@@ -31,12 +33,21 @@ program
         require(res('down'))
     })
 
+//
+program
+    .command('gitLink')
+    .description('down a new template')
+    .alias('link')
+    .action(() => {
+        require(res('gitLink'))
+    })
+
 //解析
 program.parse(process.argv)
 
 //帮助命令提示
-if(!program.args.length){
-  program.help()
+if (!program.args.length) {
+    program.help()
 }
 
 
@@ -60,4 +71,3 @@ if(!program.args.length){
 //
 //    goDownFile(dfJson[gitAddress], root, afile);
 //}
-

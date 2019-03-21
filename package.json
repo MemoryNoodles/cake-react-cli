@@ -3,7 +3,8 @@
   "version": "0.1.4",
   "description": "a simple CLI for creating your react projects",
   "bin": {
-    "cake-react-cli": "bin/index.js"
+    "cake-react-cli": "bin/index.js",
+    "cake-auto-file":"autoFile/index.js"
   },
   "author": "liyongping",
   "license": "MIT",
@@ -26,6 +27,7 @@
     "ora": "^1.4.0"
   },
   "devDependencies": {
-    "cross-spawn": "^6.0.5"
+    "cross-spawn": "^6.0.5",
+    "menu":""
   }
 }
