@@ -8,7 +8,7 @@
  *
  */
 var request = require("request");
-const fs = require('fs');
+const fs = require('fs-extra');
 request = request.defaults({jar: true});
 
 const chalk = require('chalk')
@@ -38,10 +38,13 @@ request.post({
             projectId: userInfo.projectId
         }
     }, function (err,response) {
-        // console.log(response.body);
         fs.writeFileSync('./testApi.js', "");
         fs.writeFileSync('./api.js', `import * as C from '~/constants/api';\nimport {PostMethod, PostMethodNoMessage} from './handleFetch'\nexport default {\n`);
-        fs.writeFileSync('./api.json',`{\n"data":[`)
+
+        if (!fs.existsSync("./api.json")) {
+            fs.writeFileSync('./api.json',`{\n"data":[`)
+        }
+       
         const content = JSON.parse(response.body).content
         content.data.map((item,index)=>{
             console.log(`writing........`,index);
@@ -57,9 +60,35 @@ request.post({
             }
             fs.appendFileSync("./testApi.js",constApiStr);
             fs.appendFileSync("./api.js",untilApiStr);
-            fs.appendFileSync("./api.json",`${JSON.stringify(ApiJsonObj,null,"\t")}${index<content.data.length-1?",\n":""}`);
+
+            var apiJson3 = fs.readFileSync("./api.json").toString();
+      
+            var arr = apiJson3.split(/\n/g);
+            //接口新增后写入到api.json的内容不会覆盖之前的
+            if(arr[arr.length-1].trim() == "}"){
+                var json = JSON.parse(apiJson3);
+                var flag =  json.data.some(api=>{
+                    return api.url == item.url
+                })
+                if (!flag) {
+                    json.data.push(`${JSON.stringify(ApiJsonObj,null,"\t")}${index<content.data.length-1?",\n":""}`)
+                }
+                fs.writeFileSync("./api.json",JSON.stringify(json,null,"\t"));
+          
+            }
+            else {
+                fs.appendFileSync("./api.json",`${JSON.stringify(ApiJsonObj,null,"\t")}${index<content.data.length-1?",\n":""}`);
+            }
+           
         })
         fs.appendFileSync('./api.js', `\n};`);
-        fs.appendFileSync('./api.json', `]\n}`);
+
+         var apiJson = fs.readFileSync("./api.json");
+         var arr = apiJson.toString().split(/\n/g);
+        //接口新增后写入到api.json的内容不会覆盖之前的
+        if(arr[arr.length-2].trim() != "]" ){
+            fs.appendFileSync('./api.json', `\n]\n}`);
+        }
+        
     })
 })
