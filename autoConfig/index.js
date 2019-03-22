@@ -23,3 +23,11 @@ program
         require("./commands/request.js")
 })
 
+//解析
+program.parse(process.argv)
+
+//帮助命令提示
+if (!program.args.length) {
+    program.help()
+}
+
