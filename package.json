@@ -4,7 +4,8 @@
   "description": "a simple CLI for creating your react projects",
   "bin": {
     "cake-react-cli": "bin/index.js",
-    "cake-auto-file": "autoFile/index.js"
+    "cake-auto-file": "autoFile/index.js",
+    "cake-auto-config": "autoConfig/request.js"
   },
   "author": "liyongping",
   "license": "MIT",
