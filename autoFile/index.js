@@ -59,21 +59,25 @@ for (let i=0; i<menu.length; i++){
                 fileGenerate(menuRootArr[2], menuRootArr[3], menu[i].Level2)
 
                 //新建二级文件    
-                fs.ensureDirSync(firstLowerCase(menuRootArr[3]))
-                //切换目录
-                changeCatalog(menuRootArr[3])
-                //二级目录下的jsx文件
-                levelsFile(menuRootArr[3], aMenu.item)
+                if ( fs.ensureDirSync(firstLowerCase(menuRootArr[3])) ) {
+                     //切换目录
+                    changeCatalog(menuRootArr[3])
+                    //二级目录下的jsx文件
+                    levelsFile(menuRootArr[3], aMenu.item)
+                }
+               
             }
             else {
                 //切换目录
                 changeCatalog(menuRootArr[2])
-                //新建二级文件            
-                fs.ensureDirSync(firstLowerCase(menuRootArr[3]))
-                //切换目录
-                changeCatalog(menuRootArr[3])
-                //二级目录下的jsx文件
-                levelsFile(menuRootArr[3], aMenu.item)
+                //新建并判断二级文件            
+                if ( fs.ensureDirSync(firstLowerCase(menuRootArr[3])) ) {
+                    //切换目录
+                    changeCatalog(menuRootArr[3])
+                    //二级目录下的jsx文件
+                    levelsFile(menuRootArr[3], aMenu.item)
+                }
+              
             }
 
         })
@@ -143,8 +147,8 @@ function router(Level1, Level2, mulRouter){
     }
 
     var routes = `const routes = [
-${routerArr}
-];`;
+                    ${routerArr}
+                    ];`;
     fs.appendFileSync(`${firstLowerCase(Level1)}.jsx`,  routes+`\n\n`)
 }
 
