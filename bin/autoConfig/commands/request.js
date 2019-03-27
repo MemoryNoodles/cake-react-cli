@@ -38,11 +38,11 @@ request.post({
             projectId: userInfo.projectId
         }
     }, function (err,response) {
-        fs.writeFileSync('./testApi.js', "");
-        fs.writeFileSync('./api.js', `import * as C from '~/constants/api';\nimport {PostMethod, PostMethodNoMessage} from './handleFetch'\nexport default {\n`);
+        fs.writeFileSync('./src/constants/api.js', "");
+        fs.writeFileSync('./src/until/api.js', `import * as C from '~/constants/api';\nimport {PostMethod, PostMethodNoMessage} from './handleFetch'\nexport default {\n`);
 
-        if (!fs.existsSync("./api.json")) {
-            fs.writeFileSync('./api.json',`{\n"data":[`)
+        if (!fs.existsSync("./mock-server/api.json")) {
+            fs.writeFileSync('./mock-server/api.json',`{\n"data":[`)
         }
        
         const content = JSON.parse(response.body).content
@@ -58,10 +58,12 @@ request.post({
                 mock:true,
                 res:item.result?JSON.parse(item.result):{},
             }
-            fs.appendFileSync("./testApi.js",constApiStr);
-            fs.appendFileSync("./api.js",untilApiStr);
-
-            var apiJson3 = fs.readFileSync("./api.json").toString();
+            //所有接口API
+            fs.appendFileSync("./src/constants/api.js",constApiStr);
+            //使用接口方法
+            fs.appendFileSync("./src/until/api.js",untilApiStr);
+            //mock数据
+            var apiJson3 = fs.readFileSync("./mock-server/api.json").toString();
       
             var arr = apiJson3.split(/\n/g);
             //接口新增后写入到api.json的内容不会覆盖之前的
@@ -73,21 +75,21 @@ request.post({
                 if (!flag) {
                     json.data.push(`${JSON.stringify(ApiJsonObj,null,"\t")}${index<content.data.length-1?",\n":""}`)
                 }
-                fs.writeFileSync("./api.json",JSON.stringify(json,null,"\t"));
+                fs.writeFileSync("./mock-server/api.json",JSON.stringify(json,null,"\t"));
           
             }
             else {
-                fs.appendFileSync("./api.json",`${JSON.stringify(ApiJsonObj,null,"\t")}${index<content.data.length-1?",\n":""}`);
+                fs.appendFileSync("./mock-server/api.json",`${JSON.stringify(ApiJsonObj,null,"\t")}${index<content.data.length-1?",\n":""}`);
             }
            
         })
-        fs.appendFileSync('./api.js', `\n};`);
+        fs.appendFileSync('./src/until/api.js', `\n};`);
 
-         var apiJson = fs.readFileSync("./api.json");
+         var apiJson = fs.readFileSync("./mock-server/api.json");
          var arr = apiJson.toString().split(/\n/g);
         //接口新增后写入到api.json的内容不会覆盖之前的
         if(arr[arr.length-2].trim() != "]" ){
-            fs.appendFileSync('./api.json', `\n]\n}`);
+            fs.appendFileSync('./mock-server/api.json', `\n]\n}`);
         }
         
     })
