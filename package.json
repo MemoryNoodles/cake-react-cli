@@ -3,9 +3,9 @@
   "version": "1.1.1",
   "description": "a simple CLI for creating your react projects",
   "bin": {
-    "cake-react-cli": "bin/index.js",
-    "cake-auto-file": "autoFile/index.js",
-    "cake-auto-config": "autoConfig/index.js"
+    "cake-react-cli": "./bin/template/index.js",
+    "cake-auto-file": "./bin/fileGenerate/file.js",
+    "cake-auto-config": "./bin/autoConfig/index.js"
   },
   "author": "liyongping",
   "license": "MIT",
