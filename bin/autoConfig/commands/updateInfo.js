@@ -1,5 +1,6 @@
 const { prompt } = require('inquirer')                  //一款命令行的交互框架
 const { writeFile } = require('fs-extra')    
+const path = require("path")
 const chalk = require('chalk')
 
 let userInfo = require(`../userInfo.json`)     //模板列表
@@ -42,12 +43,13 @@ const question = [
 ];
 
 module.exports = prompt(question).then(({ username, password, projectId }) => {
+    console.log(userInfo, 111)
     userInfo.username = username;
     userInfo.password = password;
     userInfo.projectId = projectId;
 
-
-    writeFile(`../userInfo.json`, JSON.stringify(userInfo), 'utf-8', (err) => {
+    console.log(userInfo, 222)
+    writeFile(path.resolve(`${__dirname}/../userInfo.json`), JSON.stringify(userInfo, null, 2), 'utf-8', (err) => {
         if (err) {
             console.log(`${err} data write error！`);
         }
