@@ -1,6 +1,6 @@
 {
   "name": "cake-react-cli",
-  "version": "1.1.2",
+  "version": "1.1.3",
   "description": "a simple CLI for creating your react projects",
   "bin": {
     "cake-react-cli": "./bin/template/index.js",
