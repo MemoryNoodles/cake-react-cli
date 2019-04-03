@@ -46,35 +46,36 @@ const question = [
     }
 ]
 
-module.exports = prompt(question).then(({ name, catalog, filename }) => {
-    console.log(process.cwd(), 33333)
-    const spinner = ora('Downloading template...');
-    spinner.start()
-    if (filename) {
-        repo(tplJson[name], catalog, filename)
-        .then(() => {
-            console.log(chalk.green('download success'));
-            spinner.stop()
-            process.exit(1);
-        })
-        .catch(() => {
-            console.log(chalk.red('download error'));
-            spinner.stop()
-             process.exit(1);
-        });
-    }
-    else {
-        repo(tplJson[name], catalog)
-        .then(() => {
-            console.log(chalk.green('download success'));
-            spinner.stop()
-            process.exit(1);
-        })
-        .catch(() => {
-            console.log(chalk.red('download error'));
-            spinner.stop()
-             process.exit(1);
-        });
-    }
-
-})
+module.exports = () =>{
+    prompt(question).then(({ name, catalog, filename }) => {
+        const spinner = ora('Downloading template...');
+        spinner.start()
+        if (filename) {
+            repo(tplJson[name], catalog, filename)
+            .then(() => {
+                console.log(chalk.green('download success'));
+                spinner.stop()
+                process.exit(1);
+            })
+            .catch(() => {
+                console.log(chalk.red('download error'));
+                spinner.stop()
+                 process.exit(1);
+            });
+        }
+        else {
+            repo(tplJson[name], catalog)
+            .then(() => {
+                console.log(chalk.green('download success'));
+                spinner.stop()
+                process.exit(1);
+            })
+            .catch(() => {
+                console.log(chalk.red('download error'));
+                 spinner.stop()
+                 process.exit(1);
+            });
+        }
+    
+    })
+}

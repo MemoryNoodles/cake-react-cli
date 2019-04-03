@@ -1,9 +1,11 @@
-#!/usr/bin/env node
+//#!/usr/bin/env node
  //上面一句话不要随便修改 作用：帮助脚本找到node的脚本解释器，没他不行。
 const program = require('commander');
 const {
     resolve
 } = require("path");
+
+var down = require("./commands/down")
 //const ora = require('ora');
 const res = command => resolve(__dirname, './commands/', command);
 
@@ -22,7 +24,7 @@ program
     .description('List all the templates')
     .alias('l')
     .action(() => {
-        require(res('list'))
+        down()
     })
 
 program

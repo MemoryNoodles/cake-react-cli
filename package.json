@@ -4,8 +4,12 @@
   "description": "a simple CLI for creating your react projects",
   "bin": {
     "cake-react-cli": "./bin/template/index.js",
+    "cake-react-test": "./build/app.js",
     "cake-auto-file": "./bin/fileGenerate/file.js",
     "cake-auto-config": "./bin/autoConfig/index.js"
+  },
+  "scripts": {
+    "build": "webpack src/ --out-dir esm/ --ignore **/__tests__,**/__mocks__"
   },
   "author": "liyongping",
   "license": "MIT",
@@ -29,7 +33,12 @@
     "ora": "^1.4.0"
   },
   "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-loader": "^8.0.5",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-stage-0": "^6.24.1",
     "cross-spawn": "^6.0.5",
-    "menu": ""
+    "menu": "",
+    "webpack": "^4.29.6"
   }
 }
