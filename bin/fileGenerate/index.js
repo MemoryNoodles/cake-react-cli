@@ -1,14 +1,23 @@
-#!/usr/bin/env node
+//#!/usr/bin/env node
  //上面一句话不要随便修改 作用：帮助脚本找到node的脚本解释器，没他不行。
 const fs = require("fs-extra");
 const path = require("path");
 const chalk = require('chalk')
 
 //文件
-let importFile = fs.readFileSync(`${__dirname}/configFile/importFile.js`, 'utf8');
-let routerConfig = fs.readFileSync(`${__dirname}/configFile/routerConfig.js`, 'utf8');
-let classFunc = fs.readFileSync(`${__dirname}/configFile/classFunc.js`, 'utf8');
-let levelsFileText = fs.readFileSync(`${__dirname}/configFile/level2.js`, 'utf8');
+/*
+打包过后console.log(__dirname); 绝对路劲就变成了bin/fileFenerate了； 
+       fs.readFileSync()也会出现问题，只能require;应该是require打包的时候就能把文件打进来，而读取文件就不行
+*/
+
+//let importFile = fs.readFileSync(`${__dirname}/configFile/importFile.js`, 'utf8');
+//let routerConfig = fs.readFileSync(`${__dirname}/configFile/routerConfig.js`, 'utf8');
+//let classFunc = fs.readFileSync(`${__dirname}/configFile/classFunc.js`, 'utf8');
+//let levelsFileText = fs.readFileSync(`${__dirname}/configFile/level2.js`, 'utf8');
+let importFile = require(`${__dirname}/configFile/importFile.js`);
+let routerConfig = require(`${__dirname}/configFile/routerConfig.js`);
+let classFunc = require(`${__dirname}/configFile/classFunc.js`);
+let levelsFileText = require(`${__dirname}/configFile/level2.js`);
 
 //menu的文件夹数据格式不能变，参照menuTemplate
 const menu = JSON.parse(fs.readFileSync(`../../config/menu.js`, 'utf8'));
@@ -100,7 +109,7 @@ function levelsFile(Level2,catalogName){
     var strClsName = `class ${firstUpperCase(Level2)} extends`;
     var strExportName = `default ${firstUpperCase(Level2)};`;
     var strHtml = `<div>${catalogName}</div>`;
-    var aFunc = levelsFileText.replace(classNameRe, strClsName).replace(exportNameRe, strExportName).replace(nameRe, strHtml);
+    var aFunc = levelsFileText().replace(classNameRe, strClsName).replace(exportNameRe, strExportName).replace(nameRe, strHtml);
     fs.writeFileSync(`${firstLowerCase(Level2)}.jsx`,  aFunc)
     
 
@@ -113,7 +122,7 @@ function levelsFile(Level2,catalogName){
 function fileGenerate(Level1, Level2, mulRouter){
 
     //写入导入文件
-    fs.appendFileSync(`${firstLowerCase(Level1)}.jsx`, importFile+`\n\n`);
+    fs.appendFileSync(`${firstLowerCase(Level1)}.jsx`, importFile()+`\n\n`);
 
     //写入路由
     if (mulRouter) {
@@ -128,7 +137,7 @@ function fileGenerate(Level1, Level2, mulRouter){
     var exportNameRe = /(?:default)(.+)(?:;)/g;
     var strClsName = `class ${firstUpperCase(Level1)} extends`;
     var strExportName = `default ${firstUpperCase(Level1)};`;
-    var aFunc = classFunc.replace(classNameRe, strClsName).replace(exportNameRe, strExportName);
+    var aFunc = classFunc().replace(classNameRe, strClsName).replace(exportNameRe, strExportName);
     fs.appendFileSync(`${firstLowerCase(Level1)}.jsx`,  aFunc)
 
 }
@@ -160,7 +169,7 @@ function aRouter(Level1, Level2){
     var pathRe = /(?:"path":)(.+)(?:,)/g;  
     var strP = `path: "${Level2}",`;
     var strR = `import("~/container/${Level1}/${Level2}/${firstLowerCase(Level2)}")`;
-    return routerConfig.replace(pathRe, strP).replace(routerRe, strR);
+    return routerConfig().replace(pathRe, strP).replace(routerRe, strR);
 
 }
 

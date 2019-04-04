@@ -4,12 +4,11 @@
   "description": "a simple CLI for creating your react projects",
   "bin": {
     "cake-react-cli": "./bin/template/index.js",
-    "cake-react-test": "./build/app.js",
-    "cake-auto-file": "./bin/fileGenerate/file.js",
-    "cake-auto-config": "./bin/autoConfig/index.js"
-  },
-  "scripts": {
-    "build": "webpack src/ --out-dir esm/ --ignore **/__tests__,**/__mocks__"
+    "cake-auto-file": "./bin/fileGenerate/index.js",
+    "cake-auto-config": "./bin/autoConfig/index.js",
+    "cake-react": "./dist/template.js",
+    "cake-config": "./dist/autoConfig.js",
+    "cake-file": "./dist/fileGenerate.js"
   },
   "author": "liyongping",
   "license": "MIT",

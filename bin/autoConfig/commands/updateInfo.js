@@ -42,17 +42,18 @@ const question = [
     }
 ];
 
-module.exports = prompt(question).then(({ username, password, projectId }) => {
-    console.log(userInfo, 111)
-    userInfo.username = username;
-    userInfo.password = password;
-    userInfo.projectId = projectId;
+module.exports = ()=>{
+    prompt(question).then(({ username, password, projectId }) => {
+        console.log(userInfo, 111)
+        userInfo.username = username;
+        userInfo.password = password;
+        userInfo.projectId = projectId;
 
-    console.log(userInfo, 222)
-    writeFile(path.resolve(`${__dirname}/../userInfo.json`), JSON.stringify(userInfo, null, 2), 'utf-8', (err) => {
-        if (err) {
-            console.log(`${err} data write error！`);
-        }
-        console.log(chalk.green('success!'))
+        writeFile(path.resolve(`${__dirname}\\..\\userInfo.json`), JSON.stringify(userInfo, null, 2), 'utf-8', (err) => {
+            if (err) {
+                console.log(`${err} data write error！`);
+            }
+            console.log(chalk.green('success!'))
+        })
     })
-})
+}

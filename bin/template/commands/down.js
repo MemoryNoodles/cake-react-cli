@@ -6,8 +6,8 @@ const repo = require('github-download-parts');
 const ora = require('ora')
 
 
-let tplJson = require(`../gitTemplate.json`)     //模板列表
-
+//let tplJson = require(`../gitTemplate.json`)     //模板列表
+let tplJson = require(`${__dirname}\\..\\gitTemplate.json`) 
 
 const question = [
     {

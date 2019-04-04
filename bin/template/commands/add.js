@@ -1,9 +1,12 @@
 const { prompt } = require('inquirer')                  //一款命令行的交互框架
-const { writeFile } = require('fs-extra')    
+const { writeFile } = require('fs-extra')   
+const path = require("path");
 
-let tplJson = require(`../gitTemplate.json`)     //模板列表
+//模板列表 webpack打包需要绝对路劲
+let tplJson = require(`${__dirname}\\..\\gitTemplate.json`)     
+//let tplJson = require(`../gitTemplate.json`)     //模板列表
 
-const question = [
+const question = [ 
     {
         type: 'input',
         name: 'name',
@@ -42,13 +45,15 @@ const question = [
     }
 ];
 
-module.exports = prompt(question).then(({ name, userName, repository }) => {
-    tplJson[name] = `${userName}/${repository}`
+module.exports = ()=>{
+    prompt(question).then(({ name, userName, repository }) => {
+        tplJson[name] = `${userName}/${repository}`
 
-    writeFile(`../gitTemplate.json`, JSON.stringify(tplJson), 'utf-8', (err) => {
-        if (err) {
-            console.log(`${err} 模板写入文件出错！`);
-        }
-        console.log('New template has been added successfully!')
+        writeFile(`${__dirname}\\..\\gitTemplate.json`, JSON.stringify(tplJson), 'utf-8', (err) => {
+            if (err) {
+                console.log(`${err} 模板写入文件出错！`);
+            }
+            console.log('New template has been added successfully!')
+        })
     })
-})
+}

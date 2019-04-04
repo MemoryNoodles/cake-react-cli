@@ -6,11 +6,13 @@ let externals = _externals();
 
 module.exports = {
     entry: {
-        app: './bin/template/index.js',
+        template: './bin/template/index.js',
+        autoConfig: './bin/autoConfig/index.js',
+        fileGenerate: './bin/fileGenerate/index.js',
     },
     target: 'node',
     output: {
-        path: path.join(__dirname, './build'),
+        path: path.join(__dirname, `./dist`),
         filename: '[name].js'
     },
     resolve: {
@@ -40,7 +42,8 @@ module.exports = {
     // },
     plugins: [
       //  new webpack.optimize.UglifyJsPlugin()
-    ]
+    ],
+    devtool:"cheap-eval-source-map"
 };
 
 function _externals() {

@@ -1,18 +1,11 @@
-#!/usr/bin/env node
+//#!/usr/bin/env node
  //上面一句话不要随便修改 作用：帮助脚本找到node的脚本解释器，没他不行。
-/**
- * Created with react_project.
- * User: 王洪瑞/3153981409@qq.com
- * Date: 2019/3/18
- * Time: 13:51
- *
- */
 var request = require("request");
 const fs = require('fs-extra');
 request = request.defaults({jar: true});
 
 const chalk = require('chalk')
-const userInfo = require(`${__dirname}/../userInfo.json`)
+const userInfo = require(`${__dirname}\\..\\userInfo.json`)
 
 //加判断
 if (!(userInfo.username && userInfo.password && userInfo.projectId)){
@@ -38,6 +31,8 @@ request.post({
             projectId: userInfo.projectId
         }
     }, function (err,response) {
+        
+        
         fs.writeFileSync('./src/constants/api.js', "");
         fs.writeFileSync('./src/until/api.js', `import * as C from '~/constants/api';\nimport {PostMethod, PostMethodNoMessage} from './handleFetch'\nexport default {\n`);
 

@@ -5,9 +5,14 @@ const {
     resolve
 } = require("path");
 
-var down = require("./commands/down")
+
 //const ora = require('ora');
-const res = command => resolve(__dirname, './commands/', command);
+//要先加载，不能后加载
+//const res = command => resolve(__dirname, './commands/', command);
+
+const down = require("./commands/down");
+const add = require("./commands/add");
+const list = require("./commands/list");
 
 
 
@@ -16,7 +21,8 @@ program
     .description('Add a new template')
     .alias('a')
     .action(() => {
-        require(res('add'))
+        add()
+        //require(res('add'))
     })
 
 program
@@ -24,7 +30,8 @@ program
     .description('List all the templates')
     .alias('l')
     .action(() => {
-        down()
+         list()
+        //require(res('list'))
     })
 
 program
@@ -32,17 +39,10 @@ program
     .description('down a new template')
     .alias('d')
     .action(() => {
-        require(res('down'))
+        down()
     })
 
-//
-program
-    .command('gitLink')
-    .description('down a new template')
-    .alias('link')
-    .action(() => {
-        require(res('gitLink'))
-    })
+
 
 //解析
 program.parse(process.argv)

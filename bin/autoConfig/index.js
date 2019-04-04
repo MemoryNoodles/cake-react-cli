@@ -1,18 +1,22 @@
-#!/usr/bin/env node
-
+//#!/usr/bin/env node
 const program = require('commander');
 
 const {
     resolve
 } = require("path");
 
+const updateInfo = require("./commands/updateInfo");
+//const request = require("./commands/request.js")
+
+
 program
     .command('updateInfo')
     .description('change user info')
     .alias('u')
     .action(() => {
-        require("./commands/updateInfo")
-})
+         updateInfo()
+        //require("./commands/updateInfo")
+    })
 
 
 program
@@ -20,7 +24,9 @@ program
     .description('Automatically generate configuration')
     .alias('g')
     .action(() => {
-        require("./commands/request.js")
+       console.log(__dirname)
+        //request()
+        require(`${__dirname}/commands/request.js`)
 })
 
 //解析
