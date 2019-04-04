@@ -3,9 +3,9 @@
   "version": "1.1.5",
   "description": "a simple CLI for creating your react projects",
   "bin": {
-    "cake-react": "./dist/template.js",
-    "cake-config": "./dist/autoConfig.js",
-    "cake-file": "./dist/fileGenerate.js"
+    "cake-react": "./bin/template.js",
+    "cake-config": "./bin/autoConfig.js",
+    "cake-file": "./bin/fileGenerate.js"
   },
   "author": "liyongping",
   "license": "MIT",
