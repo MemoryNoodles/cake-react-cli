@@ -4,7 +4,7 @@
   "description": "a simple CLI for creating your react projects",
   "bin": {
     "cake-react": "./bin/template.js",
-    "cake-config": "./bin/autoConfig.js",
+    "cake-config": "./bin/autoConfig/index.js",
     "cake-file": "./bin/fileGenerate.js"
   },
   "author": "liyongping",
